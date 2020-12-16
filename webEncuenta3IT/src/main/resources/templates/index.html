@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="app-encuesta">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+          rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+          crossorigin="anonymous">
+	<meta charset="UTF-8" />
+	<title>Encuesta Bebida Gaseosa CocaCola...</title>
+</head>
+
+<body ng-app="spring3ti-angular" ng-controller="encuestaRestController" ng-init="getIndex();getAllProducto()">
+	<div class="card w-50">
+	  <div class="card-header">
+	    <H2>Encuesta Bebida Gaseosa CocaCola...</H2>
+	  </div>
+	<div class="card-body">
+	    <form>
+			<div ng-show="ver == 0 || ver == null">
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="mail">Mail:</label>
+						<input  class="form-control" id="mail" ng-model="mail" type="text" placeholder="mail@mail.com"/><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="bebida">Cocacola:</label>
+						<select class="form-control form-control-lg" ng-model="glosaopcion" >
+				  			<option ng-repeat="idxglosa in listaResumen" value="{{$index}}" placeholder="Seleccione...">
+				   				{{idxglosa[0]}}
+						  	</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<button id="addBtn" class="btn btn-primary" ng-click="postRegistroEncuesta()">Enviar</button>
+			</div>
+		</form>
+	</div>	
+	
+	<div class="container" ng-show="ver == 1 || ver == 2">
+		<span ><h2>{{ mensaje }}</h2></span>
+	</div>
+	
+	<div class="container" ng-show="ver == 1">
+		<div class="table-responsive">
+		  <table class="table table-bordered table-hover">
+		  	    <caption>Resultado Encuesta</caption>
+				<thead class="thead-light">
+					<tr>
+						<th>Cocacola</th>
+						<th>Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="encuesta in listaResumen" >
+						<td >{{encuesta[0]}}</td>
+						<td >{{encuesta[1]}}</td>
+					</tr>
+				</tbody>	
+		  </table>
+		</div>		
+	</div>	
+	<div class="container" ng-show="ver == 1 || ver == 2">
+		<button id="okBtn" class="btn btn-success" ng-click="getIndex();getAllProducto()">OK</button>
+	</div>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-resource.js"></script>
+	<script src="./js/services.js"></script>
+</body>
+</html>
+
